@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+    <!-- Shared styles (flexbox layout + blue theme) -->
+    <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+    <!-- Centered card container -->
+    <div class="auth-container">
+        <h1>Login</h1>
+
+        <!-- Login form -->
+        <form id="loginForm">
+            <label for="username">Username</label>
+            <input id="username" type="text" name="username" placeholder="Enter username" required>
+
+            <label for="password">Password</label>
+            <input id="password" type="password" name="password" placeholder="Enter password" required>
+
+            <button type="submit">Login</button>
+        </form>
+
+        <!-- Message area for validation feedback -->
+        <p id="message"></p>
+
+        <!-- Link to register page -->
+        <p class="link">
+            Don't have an account?
+            <a href="register.html">Register</a>
+        </p>
+    </div>
+
+    <script>
+        // Get form and message elements
+        const form = document.getElementById('loginForm');
+        const message = document.getElementById('message');
+
+        // Handle form submit
+        form.addEventListener('submit', (e) => {
+            e.preventDefault(); // stop page reload
+
+            const username = form.username.value.trim();
+            const password = form.password.value.trim();
+
+            // Simple validation: both fields must be filled
+            if (!username || !password) {
+                message.textContent = 'Please fill in all fields.';
+                message.style.color = '#dc2626'; // red
+                return;
+            }
+
+            // Save the submitted data so the next page can display it.
+            // JSON.stringify() turns a JavaScript object into JSON text
+            // so it can be stored in sessionStorage.
+            sessionStorage.setItem('formData', JSON.stringify({
+                source: 'login',      // where this data came from
+                username: username,   // the username entered
+                password: password     // the password entered (masked later)
+            }));
+
+            // Redirect to the display page
+            window.location.href = 'result.html';
+        });
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,86 @@
+/* Reset: remove default margin/padding and make sizing easier */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+/* Page background and center the card using Flexbox */
+body {
+  font-family: system-ui, -apple-system, "Segoe UI", sans-serif;
+  min-height: 100vh;          /* full screen height */
+  display: flex;              /* Flexbox container */
+  align-items: center;        /* center vertically */
+  justify-content: center;    /* center horizontally */
+  background: #f5f5f5;
+}
+
+/* The login/register card */
+.auth-container {
+  width: 100%;
+  max-width: 400px;
+  padding: 2rem;
+  background: #ffffff;
+  border-radius: 12px;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
+
+  /* Stack items vertically with space between them */
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.auth-container h1 {
+  font-size: 1.5rem;
+  text-align: center;
+}
+
+/* Form fields stacked vertically */
+.auth-container form {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.auth-container label {
+  font-size: 0.9rem;
+  font-weight: 500;
+}
+
+.auth-container input {
+  padding: 0.6rem 0.75rem;
+  border: 1px solid #d1d5db;
+  border-radius: 8px;
+  font: inherit;
+}
+
+/* Primary button */
+.auth-container button {
+  padding: 0.6rem 0.75rem;
+  border: none;
+  border-radius: 8px;
+  background: #2563eb;       /* blue primary color */
+  color: #ffffff;
+  font: inherit;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.auth-container button:hover {
+  background: #1d4ed8;       /* darker blue on hover */
+}
+
+/* Link below the form */
+.auth-container .link {
+  text-align: center;
+  font-size: 0.9rem;
+}
+
+.auth-container .link a {
+  color: #2563eb;
+  text-decoration: none;
+}
+
+.auth-container .link a:hover {
+  text-decoration: underline;
+}

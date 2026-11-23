@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Submitted Data</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+    <div class="auth-container">
+        <h1>Submitted Data</h1>
+
+        <!-- Source of the form (login or register) -->
+        <p><strong>Source:</strong> <span id="source"></span></p>
+
+        <!-- Fields will be injected here -->
+        <div id="fields"></div>
+
+        <!-- Back link -->
+        <p class="link">
+            <a href="login.html">Back to Login</a> |
+            <a href="register.html">Back to Register</a>
+        </p>
+    </div>
+
+    <script>
+        // Read the saved form data from sessionStorage
+        const raw = sessionStorage.getItem('formData');
+
+        const sourceEl = document.getElementById('source');
+        const fieldsEl = document.getElementById('fields');
+
+        if (!raw) {
+            sourceEl.textContent = 'No data found.';
+            fieldsEl.textContent = 'Please submit a form first.';
+        } else {
+            // JSON.parse() turns the stored JSON text back into a JavaScript object
+            const data = JSON.parse(raw);
+
+            // Show where the data came from
+            sourceEl.textContent = data.source;
+
+            // Show each field (password is masked for safety)
+            const entries = Object.entries(data).filter(([key]) => key !== 'source');
+            entries.forEach(([key, value]) => {
+                const p = document.createElement('p');
+                const label = key.charAt(0).toUpperCase() + key.slice(1);
+                // Show the actual value (no masking) for learning purposes
+                p.innerHTML = `<strong>${label}:</strong> ${value}`;
+                fieldsEl.appendChild(p);
+            });
+        }
+    </script>
+</body>
+
+</html>

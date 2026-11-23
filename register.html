@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Register</title>
+    <!-- Shared styles (flexbox layout + blue theme) -->
+    <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+    <!-- Centered card container -->
+    <div class="auth-container">
+        <h1>Register</h1>
+
+        <!-- Registration form -->
+        <form id="registerForm">
+            <label for="name">Name</label>
+            <input id="name" type="text" name="name" placeholder="Enter your name" required>
+
+            <label for="username">Username</label>
+            <input id="username" type="text" name="username" placeholder="Choose a username" required>
+
+            <label for="password">Password</label>
+            <input id="password" type="password" name="password" placeholder="Create a password" required>
+
+            <label for="confirmPassword">Confirm Password</label>
+            <input id="confirmPassword" type="password" name="confirmPassword" placeholder="Repeat password" required>
+
+            <button type="submit">Register</button>
+        </form>
+
+        <!-- Message area for validation feedback -->
+        <p id="message"></p>
+
+        <!-- Link to login page -->
+        <p class="link">
+            Already have an account?
+            <a href="login.html">Login</a>
+        </p>
+    </div>
+
+    <script>
+        // Get form and message elements
+        const form = document.getElementById('registerForm');
+        const message = document.getElementById('message');
+
+        // Handle form submit
+        form.addEventListener('submit', (e) => {
+            e.preventDefault(); // stop page reload
+
+            const name = form.name.value.trim();
+            const username = form.username.value.trim();
+            const password = form.password.value.trim();
+            const confirmPassword = form.confirmPassword.value.trim();
+
+            // Check all fields are filled
+            if (!name || !username || !password || !confirmPassword) {
+                message.textContent = 'Please fill in all fields.';
+                message.style.color = '#dc2626'; // red
+                return;
+            }
+
+            // Check passwords match
+            if (password !== confirmPassword) {
+                message.textContent = 'Passwords do not match.';
+                message.style.color = '#dc2626'; // red
+                return;
+            }
+
+            // Save the submitted data so the next page can display it.
+            // JSON.stringify() converts the JavaScript object into JSON text
+            // so sessionStorage can store it.
+            sessionStorage.setItem('formData', JSON.stringify({
+                source: 'register',   // where this data came from
+                name: name,           // the name entered
+                username: username,   // the username entered
+                password: password     // the password entered (masked later)
+            }));
+
+            // Redirect to the display page
+            window.location.href = 'result.html';
+        });
+    </script>
+</body>
+
+</html>
